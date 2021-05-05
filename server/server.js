@@ -2,6 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan"); //logs request or show requests on the terminal 
 const mongoose = require("mongoose");
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 
@@ -11,7 +14,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //Connect to mongoose database
-mongoose.connect("mongodb+srv://root:LGRJsiKbKRtKZVSx@amazon-redesign.imese.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+mongoose.connect(process.env.DATABASE,
+{ useNewUrlParser: true , useUnifiedTopology: true},
+
 err => {
     if (err){
         console.log(err)
