@@ -7,7 +7,9 @@ const dotenv = require('dotenv');
 //Require the user model schema
 const User = require("./models/user");
 
+//secure database secrets
 dotenv.config();
+
 const app = express();
 
 //Middlewares
@@ -27,28 +29,11 @@ err => {
     }
 })
 
-//GET - Getting data from the server
-app.get('/', (req, res) => {
-    res.json("Amazone clone")
-});
+//Require Apis
+const productRoutes = require('./routes/product');
+app.use('/api', productRoutes);
 
-//POST - Send data from frontend to backend
-app.post('/', (req, res) => {
-    let user = new User();
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.password = req.body.password;
-
-    user.save(err => {
-        if (err){
-            res.json(err)
-        }else {
-            res.json("Successfully saved!")
-        }
-    });
-});
-
-
+//Listening to PORT
 const PORT = 4000;
 app.listen(PORT, (err) => {
     if (err) {
