@@ -31,7 +31,12 @@ err => {
 
 //Require Apis
 const productRoutes = require('./routes/product');
+const categoryRoutes = require('./routes/category');
+const ownerRoutes = require('./routes/owner');
+
 app.use('/api', productRoutes);
+app.use('/api', categoryRoutes);
+app.use('/api', ownerRoutes);
 
 //Listening to PORT
 const PORT = 4000;
